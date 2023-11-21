@@ -7,20 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D4FDA75EB9F065BF9F2C477 /* Pods_LegalEagle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F5D875BA220EDAB5C5B16E /* Pods_LegalEagle.framework */; };
+		EE1A70692B0B43E30086408A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A70682B0B43E30086408A /* HomeViewController.swift */; };
+		EE1A706D2B0B441E0086408A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706C2B0B441E0086408A /* UIView+.swift */; };
+		EE1A706F2B0B44520086408A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706E2B0B44520086408A /* UIColor+.swift */; };
 		EEC25C9C2B0B42200038DBBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC25C9B2B0B42200038DBBB /* AppDelegate.swift */; };
 		EEC25C9E2B0B42200038DBBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC25C9D2B0B42200038DBBB /* SceneDelegate.swift */; };
 		EEC25CA02B0B42200038DBBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC25C9F2B0B42200038DBBB /* ViewController.swift */; };
-		EEC25CA32B0B42200038DBBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC25CA12B0B42200038DBBB /* Main.storyboard */; };
 		EEC25CA52B0B42210038DBBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC25CA42B0B42210038DBBB /* Assets.xcassets */; };
 		EEC25CA82B0B42210038DBBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC25CA62B0B42210038DBBB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A93B1FD627F055F2077BBB3 /* Pods-LegalEagle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegalEagle.release.xcconfig"; path = "Target Support Files/Pods-LegalEagle/Pods-LegalEagle.release.xcconfig"; sourceTree = "<group>"; };
+		93F5D875BA220EDAB5C5B16E /* Pods_LegalEagle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LegalEagle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE6993E6F407BFBE150CEBB /* Pods-LegalEagle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegalEagle.debug.xcconfig"; path = "Target Support Files/Pods-LegalEagle/Pods-LegalEagle.debug.xcconfig"; sourceTree = "<group>"; };
+		EE1A70682B0B43E30086408A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		EE1A706C2B0B441E0086408A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		EE1A706E2B0B44520086408A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		EEC25C982B0B42200038DBBB /* LegalEagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegalEagle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC25C9B2B0B42200038DBBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC25C9D2B0B42200038DBBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EEC25C9F2B0B42200038DBBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EEC25CA22B0B42200038DBBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEC25CA42B0B42210038DBBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC25CA72B0B42210038DBBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEC25CA92B0B42210038DBBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,17 +39,78 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D4FDA75EB9F065BF9F2C477 /* Pods_LegalEagle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0231A545C5BFBDD00ECC71F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EAE6993E6F407BFBE150CEBB /* Pods-LegalEagle.debug.xcconfig */,
+				5A93B1FD627F055F2077BBB3 /* Pods-LegalEagle.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D60AB2A662079AC7AD2CA2E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93F5D875BA220EDAB5C5B16E /* Pods_LegalEagle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE1A70642B0B43950086408A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EEC25C9B2B0B42200038DBBB /* AppDelegate.swift */,
+				EEC25C9D2B0B42200038DBBB /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EE1A70652B0B43A10086408A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EE1A70662B0B43B70086408A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				EE1A70682B0B43E30086408A /* HomeViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		EE1A706A2B0B44000086408A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EE1A706B2B0B440D0086408A /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EE1A706B2B0B440D0086408A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EE1A706C2B0B441E0086408A /* UIView+.swift */,
+				EE1A706E2B0B44520086408A /* UIColor+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		EEC25C8F2B0B42200038DBBB = {
 			isa = PBXGroup;
 			children = (
 				EEC25C9A2B0B42200038DBBB /* LegalEagle */,
 				EEC25C992B0B42200038DBBB /* Products */,
+				A0231A545C5BFBDD00ECC71F /* Pods */,
+				D60AB2A662079AC7AD2CA2E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,10 +125,11 @@
 		EEC25C9A2B0B42200038DBBB /* LegalEagle */ = {
 			isa = PBXGroup;
 			children = (
-				EEC25C9B2B0B42200038DBBB /* AppDelegate.swift */,
-				EEC25C9D2B0B42200038DBBB /* SceneDelegate.swift */,
+				EE1A706A2B0B44000086408A /* Utils */,
+				EE1A70642B0B43950086408A /* App */,
+				EE1A70652B0B43A10086408A /* Models */,
+				EE1A70662B0B43B70086408A /* Scenes */,
 				EEC25C9F2B0B42200038DBBB /* ViewController.swift */,
-				EEC25CA12B0B42200038DBBB /* Main.storyboard */,
 				EEC25CA42B0B42210038DBBB /* Assets.xcassets */,
 				EEC25CA62B0B42210038DBBB /* LaunchScreen.storyboard */,
 				EEC25CA92B0B42210038DBBB /* Info.plist */,
@@ -74,9 +144,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEC25CAC2B0B42210038DBBB /* Build configuration list for PBXNativeTarget "LegalEagle" */;
 			buildPhases = (
+				E321725887E89F0FC7595F44 /* [CP] Check Pods Manifest.lock */,
 				EEC25C942B0B42200038DBBB /* Sources */,
 				EEC25C952B0B42200038DBBB /* Frameworks */,
 				EEC25C962B0B42200038DBBB /* Resources */,
+				76D8BDB0FA9B574635DC79DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,11 +199,52 @@
 			files = (
 				EEC25CA82B0B42210038DBBB /* LaunchScreen.storyboard in Resources */,
 				EEC25CA52B0B42210038DBBB /* Assets.xcassets in Resources */,
-				EEC25CA32B0B42200038DBBB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		76D8BDB0FA9B574635DC79DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LegalEagle/Pods-LegalEagle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LegalEagle/Pods-LegalEagle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LegalEagle/Pods-LegalEagle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E321725887E89F0FC7595F44 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LegalEagle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EEC25C942B0B42200038DBBB /* Sources */ = {
@@ -141,20 +254,15 @@
 				EEC25CA02B0B42200038DBBB /* ViewController.swift in Sources */,
 				EEC25C9C2B0B42200038DBBB /* AppDelegate.swift in Sources */,
 				EEC25C9E2B0B42200038DBBB /* SceneDelegate.swift in Sources */,
+				EE1A70692B0B43E30086408A /* HomeViewController.swift in Sources */,
+				EE1A706D2B0B441E0086408A /* UIView+.swift in Sources */,
+				EE1A706F2B0B44520086408A /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EEC25CA12B0B42200038DBBB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EEC25CA22B0B42200038DBBB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EEC25CA62B0B42210038DBBB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,6 +395,7 @@
 		};
 		EEC25CAD2B0B42210038DBBB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAE6993E6F407BFBE150CEBB /* Pods-LegalEagle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -315,6 +424,7 @@
 		};
 		EEC25CAE2B0B42210038DBBB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A93B1FD627F055F2077BBB3 /* Pods-LegalEagle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
