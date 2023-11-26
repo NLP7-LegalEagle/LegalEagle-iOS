@@ -24,7 +24,47 @@ class HomeViewController: UIViewController {
     private lazy var othersButton: UIButton = {
         let button = UIButton()
         button.setImage(LegalEagleImageCollection.otherIconImage, for: .normal)
+        button.addTarget(self, action: #selector(othersButtonTapped), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var dimView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        view.isHidden = true
+        
+        return view
+    }()
+    
+    private lazy var warningView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 10
+        view.isHidden = true
+        
+        return view
+    }()
+    
+    private lazy var warningTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WARNING"
+        label.textColor = .legalBlue
+        label.font = .pretendard(size: 20, weight: .bold)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var warningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "This AI-generated content should not be considered legal advice. Always consult a qualified legal professional for important legal matters."
+        label.textColor = .black
+        label.font = .pretendard(size: 15, weight: .semiBold)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        
+        return label
     }()
     
     private var bottomView: UIView = {
@@ -49,6 +89,9 @@ class HomeViewController: UIViewController {
         let placeholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.legalGray]
         field.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
         
+        field.autocorrectionType = .no
+        
+        field.font = .pretendard(size: 15)
         field.textColor = .black
         field.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
         field.leftViewMode = .always
@@ -108,10 +151,13 @@ class HomeViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(tapGesture)
+        
+        let dimTapGesture = UITapGestureRecognizer(target: self, action: #selector(hideWarningView))
+        dimView.addGestureRecognizer(dimTapGesture)
     }
     
     private func addSubviews() {
-        self.view.addSubviews(topView, bottomView, chatScrollView)
+        self.view.addSubviews(topView, bottomView, chatScrollView, dimView, warningView)
         
         self.topView.addSubviews(titleLabel, othersButton)
         self.bottomView.addSubviews(textInputContainerView, sendButton)
@@ -119,6 +165,8 @@ class HomeViewController: UIViewController {
         self.chatScrollView.addSubview(chatView)
         
         self.chatView.addSubviews(eagleCircleImageView)
+        
+        self.warningView.addSubviews(warningTitleLabel, warningLabel)
     }
     
     private func makeConstraint() {
@@ -135,6 +183,28 @@ class HomeViewController: UIViewController {
             make.trailing.equalToSuperview().inset(30)
             make.width.height.equalTo(33)
             make.centerY.equalTo(titleLabel)
+        }
+        
+        dimView.snp.makeConstraints{ make in
+            make.edges.equalToSuperview()
+        }
+        
+        warningView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(150)
+        }
+        
+        warningTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.centerX.equalToSuperview()
+        }
+
+        warningLabel.snp.makeConstraints { make in
+            make.top.equalTo(warningTitleLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
         }
         
         bottomView.snp.makeConstraints{ make in
@@ -183,6 +253,27 @@ class HomeViewController: UIViewController {
             make.leading.equalToSuperview()
         }
     }
+    
+    @objc private func othersButtonTapped() {
+        dimView.isHidden = false
+        warningView.isHidden = false
+
+        UIView.animate(withDuration: 0.3) {
+            self.dimView.alpha = 1
+            self.warningView.alpha = 1
+        }
+    }
+    
+    @objc private func hideWarningView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.dimView.alpha = 0
+            self.warningView.alpha = 0
+        }) { _ in
+            self.dimView.isHidden = true
+            self.warningView.isHidden = true
+        }
+    }
+
     
     @objc private func sendButtonTapped() {
         guard let text = inputTextField.text, !text.isEmpty else {
