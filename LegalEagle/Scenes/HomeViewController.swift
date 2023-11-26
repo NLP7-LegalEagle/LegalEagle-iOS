@@ -44,8 +44,12 @@ class HomeViewController: UIViewController {
     
     private var inputTextField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Write your case here."
-        field.textColor = .legalGray
+        
+        let placeholderText = "Write your case here."
+        let placeholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.legalGray]
+        field.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
+        
+        field.textColor = .black
         field.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
         field.leftViewMode = .always
 
@@ -101,6 +105,9 @@ class HomeViewController: UIViewController {
             selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(tapGesture)
     }
     
     private func addSubviews() {
@@ -177,7 +184,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc func sendButtonTapped() {
+    @objc private func sendButtonTapped() {
         guard let text = inputTextField.text, !text.isEmpty else {
             print("No text to send")
             // Please Input Text 알림 띄워도 좋을 듯
@@ -186,21 +193,28 @@ class HomeViewController: UIViewController {
                 
         //MARK: 텍스트 서버에 전송하는 함수 호출
         // sendInputText(text)
+        
+        // inputTextField 비우기
+        inputTextField.text = ""
     }
     
     private func sendInputText(_ text: String) {
         
     }
     
-    @objc func keyboardWillShow(_ notification: NSNotification) {
+    @objc private func viewTapped() {
+        view.endEditing(true)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
         adjustViewForKeyboard(notification: notification, keyboardWillShow: true)
     }
 
-    @objc func keyboardWillHide(_ notification: NSNotification) {
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
         adjustViewForKeyboard(notification: notification, keyboardWillShow: false)
     }
 
-    func adjustViewForKeyboard(notification: NSNotification, keyboardWillShow: Bool) {
+    private func adjustViewForKeyboard(notification: NSNotification, keyboardWillShow: Bool) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let keyboardHeight = keyboardSize.height
         
@@ -208,11 +222,11 @@ class HomeViewController: UIViewController {
         
         if keyboardWillShow {
             bottomView.snp.updateConstraints { make in
-                make.bottom.equalToSuperview().offset(-keyboardHeight)
+                make.bottom.equalTo(additionalSafeAreaInsets).offset(-keyboardHeight)
             }
         } else {
             bottomView.snp.updateConstraints { make in
-                make.bottom.equalToSuperview()
+                make.bottom.equalTo(additionalSafeAreaInsets).inset(15)
             }
         }
         
