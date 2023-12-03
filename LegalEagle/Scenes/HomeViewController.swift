@@ -11,6 +11,9 @@ import Combine
 
 class HomeViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
+    private var inputText = [""]
+    
+    var activityIndicator: UIActivityIndicatorView?
     
     private var topView: UIView = {
         let view = UIView()
@@ -117,16 +120,18 @@ class HomeViewController: UIViewController {
         return button
     }()
     
-    private var chatScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        
-        return scrollView
-    }()
-    
     private var chatView: UIView = {
         let view = UIView()
         
         return view
+    }()
+    
+    private var chatTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        return tableView
     }()
     
     private var eagleCircleImageView: UIImageView = {
@@ -146,6 +151,13 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = .white
         
         inputTextField.delegate = self
+        
+        chatTableView.dataSource = self
+        chatTableView.delegate = self
+        chatTableView.register(ChatInputTableViewCell.self,
+                                          forCellReuseIdentifier: ChatInputTableViewCell.identifier)
+        chatTableView.rowHeight = UITableView.automaticDimension
+        chatTableView.estimatedRowHeight = 100
         
         // 키보드 알림 추가
         NotificationCenter.default.addObserver(
@@ -169,7 +181,7 @@ class HomeViewController: UIViewController {
     
     private func addSubviews() {
         
-        self.view.addSubviews(topView, bottomView, chatScrollView, dimView, warningView)
+        self.view.addSubviews(topView, bottomView, chatView, dimView, warningView)
         
         self.topView.addSubviews(titleLabel, infoButton)
         
@@ -177,9 +189,7 @@ class HomeViewController: UIViewController {
         
         self.textInputContainerView.addSubviews(inputTextField)
         
-        self.chatScrollView.addSubview(chatView)
-        
-        self.chatView.addSubviews(eagleCircleImageView)
+        self.chatView.addSubviews(eagleCircleImageView, chatTableView)
         
         self.warningView.addSubviews(warningTitleLabel, warningLabel)
     }
@@ -191,15 +201,15 @@ class HomeViewController: UIViewController {
             make.height.equalTo(100)
         }
         
-        titleLabel.snp.makeConstraints{ make in
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        
         infoButton.snp.makeConstraints{ make in
             make.leading.equalToSuperview().inset(30)
             make.width.height.equalTo(33)
-            make.centerY.equalTo(titleLabel)
+            make.bottom.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints{ make in
+            make.centerY.equalTo(infoButton)
+            make.centerX.equalToSuperview()
         }
         
         dimView.snp.makeConstraints{ make in
@@ -230,18 +240,16 @@ class HomeViewController: UIViewController {
             make.height.equalTo(100)
         }
         
-        chatScrollView.snp.makeConstraints{ make in
-            make.top.equalTo(topView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(bottomView.snp.top)
-        }
-        
         chatView.snp.makeConstraints{ make in
-            make.top.equalToSuperview()
+            make.top.equalTo(topView.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(500)
+            make.bottom.equalTo(bottomView.snp.top).offset(-10)
+        }
+        
+        chatTableView.snp.makeConstraints{ make in
+            make.edges.equalToSuperview()
         }
         
         eagleCircleImageView.snp.makeConstraints{ make in
@@ -267,6 +275,7 @@ class HomeViewController: UIViewController {
         inputTextField.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
     }
     
@@ -309,8 +318,10 @@ class HomeViewController: UIViewController {
                 self.inputTextField.text = output.output
             }
             .store(in: &cancellable)
-
-
+        
+        self.inputText.append(text)
+        print(inputText)
+        self.chatTableView.reloadData()
         
         //MARK: 텍스트 서버에 전송하는 함수 호출
         // sendInputText(text)
@@ -351,6 +362,21 @@ class HomeViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
+    private func showCustomIndicator(for seconds: Int, completion: @escaping () -> Void) {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+
+        activityIndicator = indicator // 나중에 중지 가능
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(seconds)) {
+            indicator.stopAnimating()
+            indicator.removeFromSuperview()
+            completion()
+        }
+    }
 }
 
 extension HomeViewController: UITextFieldDelegate {
@@ -363,10 +389,42 @@ extension HomeViewController: UITextFieldDelegate {
         
         self.sendButton.isEnabled = true
         self.sendButton.setImage(LegalEagleImageCollection.sendIconImage, for: .normal)
-        print(text)
+//        print(text)
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(self.inputText.count)
+        return self.inputText.count-1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.identifier) as? ChatInputTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        if self.inputText.count > 1 {
+            let chatInputText = self.inputText[indexPath.row+1]
+            print(chatInputText)
+            cell.updateChatInput(chatInputText)
+        }
+        
+        showCustomIndicator(for: 5) {
+            print("End Indicator")
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+}
+
