@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D4FDA75EB9F065BF9F2C477 /* Pods_LegalEagle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F5D875BA220EDAB5C5B16E /* Pods_LegalEagle.framework */; };
+		A566F9ED2B1C5942003754A1 /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566F9EC2B1C5942003754A1 /* NetworkModel.swift */; };
+		A566F9FD2B1C5CBF003754A1 /* TextGenerationOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566F9FC2B1C5CBF003754A1 /* TextGenerationOutput.swift */; };
 		EE1A70692B0B43E30086408A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A70682B0B43E30086408A /* HomeViewController.swift */; };
 		EE1A706D2B0B441E0086408A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706C2B0B441E0086408A /* UIView+.swift */; };
 		EE1A706F2B0B44520086408A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706E2B0B44520086408A /* UIColor+.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		5A93B1FD627F055F2077BBB3 /* Pods-LegalEagle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegalEagle.release.xcconfig"; path = "Target Support Files/Pods-LegalEagle/Pods-LegalEagle.release.xcconfig"; sourceTree = "<group>"; };
 		93F5D875BA220EDAB5C5B16E /* Pods_LegalEagle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LegalEagle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A566F9EC2B1C5942003754A1 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = SOURCE_ROOT; };
+		A566F9FC2B1C5CBF003754A1 /* TextGenerationOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextGenerationOutput.swift; sourceTree = "<group>"; };
 		EAE6993E6F407BFBE150CEBB /* Pods-LegalEagle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegalEagle.debug.xcconfig"; path = "Target Support Files/Pods-LegalEagle/Pods-LegalEagle.debug.xcconfig"; sourceTree = "<group>"; };
 		EE1A70682B0B43E30086408A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		EE1A706C2B0B441E0086408A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		EE1A70652B0B43A10086408A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A566F9EC2B1C5942003754A1 /* NetworkModel.swift */,
+				A566F9FC2B1C5CBF003754A1 /* TextGenerationOutput.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,6 +302,8 @@
 			files = (
 				EEC25C9C2B0B42200038DBBB /* AppDelegate.swift in Sources */,
 				EEC25C9E2B0B42200038DBBB /* SceneDelegate.swift in Sources */,
+				A566F9ED2B1C5942003754A1 /* NetworkModel.swift in Sources */,
+				A566F9FD2B1C5CBF003754A1 /* TextGenerationOutput.swift in Sources */,
 				EEB1A37C2B104B66007EFD17 /* UIFont+.swift in Sources */,
 				EE1A70692B0B43E30086408A /* HomeViewController.swift in Sources */,
 				EE1A706D2B0B441E0086408A /* UIView+.swift in Sources */,
@@ -445,7 +453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UKZF3A6P2B;
+				DEVELOPMENT_TEAM = B2XR5545F7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LegalEagle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -474,7 +482,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UKZF3A6P2B;
+				DEVELOPMENT_TEAM = B2XR5545F7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LegalEagle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
