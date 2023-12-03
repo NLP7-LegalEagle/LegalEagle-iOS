@@ -19,10 +19,19 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LegalEagle_LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uwl-Be-reD">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NLP 7 Team Porject" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHV-bR-JCo">
+                                <rect key="frame" x="20" y="754" width="353" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="underPageBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UHV-bR-JCo" secondAttribute="bottom" constant="40" id="7BF-Cz-UAJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UHV-bR-JCo" secondAttribute="trailing" constant="20" id="Dov-Jv-vJa"/>
+                            <constraint firstItem="UHV-bR-JCo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pwu-oO-0a6"/>
                             <constraint firstAttribute="trailing" secondItem="Uwl-Be-reD" secondAttribute="trailing" id="XGa-oW-ia1"/>
                             <constraint firstAttribute="bottom" secondItem="Uwl-Be-reD" secondAttribute="bottom" id="ZZp-T5-4cZ"/>
                             <constraint firstItem="Uwl-Be-reD" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="qDY-dP-xfh"/>
@@ -39,6 +48,9 @@
         <image name="LegalEagle_LaunchScreen.png" width="393" height="852"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="underPageBackgroundColor">
+            <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

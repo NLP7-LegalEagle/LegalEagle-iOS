@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class HomeViewController: UIViewController {
+    private var cancellable = Set<AnyCancellable>()
+    
     private var topView: UIView = {
         let view = UIView()
         return view
@@ -21,9 +24,14 @@ class HomeViewController: UIViewController {
         return label
     }()
     
-    private lazy var othersButton: UIButton = {
+    private lazy var infoButton: UIButton = {
         let button = UIButton()
-        button.setImage(LegalEagleImageCollection.otherIconImage, for: .normal)
+        let configuraiton = UIImage.SymbolConfiguration(font: .pretendard(size: 20))
+        var image = LegalEagleImageCollection.questionIconImage
+        image = image.withConfiguration(configuraiton)
+        button.setImage(image, for: .normal)
+        button.imageView?.tintColor = .black
+        button.addTarget(self, action: #selector(othersButtonTapped), for: .touchUpInside)
         button.addTarget(self, action: #selector(othersButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -75,7 +83,7 @@ class HomeViewController: UIViewController {
     
     private var textInputContainerView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 17.5
+        view.layer.cornerRadius = 24
         view.layer.borderWidth = 1.0
         view.layer.borderColor = UIColor.legalGray.cgColor
         
@@ -95,7 +103,7 @@ class HomeViewController: UIViewController {
         field.textColor = .black
         field.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
         field.leftViewMode = .always
-
+        
         return field
     }()
     
@@ -103,12 +111,16 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.setImage(LegalEagleImageCollection.sendIconImage, for: .normal)
         button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 24
+        button.isEnabled = false
+        button.backgroundColor = .lightGray
         return button
     }()
     
     private var chatScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-
+        
         return scrollView
     }()
     
@@ -142,7 +154,7 @@ class HomeViewController: UIViewController {
             selector: #selector(self.keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
             object: nil)
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillHide),
@@ -157,11 +169,15 @@ class HomeViewController: UIViewController {
     }
     
     private func addSubviews() {
+        
         self.view.addSubviews(topView, bottomView, chatScrollView, dimView, warningView)
         
-        self.topView.addSubviews(titleLabel, othersButton)
+        self.topView.addSubviews(titleLabel, infoButton)
+        
         self.bottomView.addSubviews(textInputContainerView, sendButton)
+        
         self.textInputContainerView.addSubviews(inputTextField)
+        
         self.chatScrollView.addSubview(chatView)
         
         self.chatView.addSubviews(eagleCircleImageView)
@@ -175,12 +191,14 @@ class HomeViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(100)
         }
+        
         titleLabel.snp.makeConstraints{ make in
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        othersButton.snp.makeConstraints{ make in
-            make.trailing.equalToSuperview().inset(30)
+        
+        infoButton.snp.makeConstraints{ make in
+            make.leading.equalToSuperview().inset(30)
             make.width.height.equalTo(33)
             make.centerY.equalTo(titleLabel)
         }
@@ -199,7 +217,7 @@ class HomeViewController: UIViewController {
             make.top.equalToSuperview().offset(15)
             make.centerX.equalToSuperview()
         }
-
+        
         warningLabel.snp.makeConstraints { make in
             make.top.equalTo(warningTitleLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
@@ -208,10 +226,9 @@ class HomeViewController: UIViewController {
         }
         
         bottomView.snp.makeConstraints{ make in
-            make.bottom.equalTo(additionalSafeAreaInsets).inset(15)
-//            make.bottom.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(100)
         }
         
         chatScrollView.snp.makeConstraints{ make in
@@ -219,6 +236,7 @@ class HomeViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(bottomView.snp.top)
         }
+        
         chatView.snp.makeConstraints{ make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -234,18 +252,17 @@ class HomeViewController: UIViewController {
         }
         
         sendButton.snp.makeConstraints{ make in
-//            make.top.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(13)
-            make.width.height.equalTo(36)
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(textInputContainerView)
+            make.width.equalTo(sendButton.snp.height)
         }
         
         textInputContainerView.snp.makeConstraints{ make in
-//            make.top.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(15)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
             make.trailing.equalTo(sendButton.snp.leading).offset(-9)
-            make.height.equalTo(35)
+            make.height.equalTo(48)
         }
         
         inputTextField.snp.makeConstraints{ make in
@@ -257,7 +274,7 @@ class HomeViewController: UIViewController {
     @objc private func othersButtonTapped() {
         dimView.isHidden = false
         warningView.isHidden = false
-
+        
         UIView.animate(withDuration: 0.3) {
             self.dimView.alpha = 1
             self.warningView.alpha = 1
@@ -273,24 +290,34 @@ class HomeViewController: UIViewController {
             self.warningView.isHidden = true
         }
     }
-
+    
     
     @objc private func sendButtonTapped() {
-        guard let text = inputTextField.text, !text.isEmpty else {
+        sendInputText(inputTextField.text)
+    }
+    
+    private func sendInputText(_ text: String?) {
+        guard let text = text, !text.isEmpty else {
             print("No text to send")
-            // Please Input Text 알림 띄워도 좋을 듯
             return
         }
+        
+        NetworkModel.shared.sendText(text: text)
+            .receive(on: DispatchQueue.main)
+            .sink { error in
                 
+            } receiveValue: { output in
+                self.inputTextField.text = output.output
+            }
+            .store(in: &cancellable)
+
+
+        
         //MARK: 텍스트 서버에 전송하는 함수 호출
         // sendInputText(text)
         
         // inputTextField 비우기
         inputTextField.text = ""
-    }
-    
-    private func sendInputText(_ text: String) {
-        
     }
     
     @objc private func viewTapped() {
@@ -300,11 +327,11 @@ class HomeViewController: UIViewController {
     @objc private func keyboardWillShow(_ notification: NSNotification) {
         adjustViewForKeyboard(notification: notification, keyboardWillShow: true)
     }
-
+    
     @objc private func keyboardWillHide(_ notification: NSNotification) {
         adjustViewForKeyboard(notification: notification, keyboardWillShow: false)
     }
-
+    
     private func adjustViewForKeyboard(notification: NSNotification, keyboardWillShow: Bool) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let keyboardHeight = keyboardSize.height
@@ -328,6 +355,17 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text, !text.isEmpty else {
+            self.sendButton.isEnabled = false
+            self.sendButton.backgroundColor = .lightGray
+            return
+        }
+        
+        self.sendButton.isEnabled = true
+        self.sendButton.backgroundColor = .clear
+        print(text)
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

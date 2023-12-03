@@ -13,4 +13,5 @@ final class LegalEagleImageCollection {
     static let otherIconImage: UIImage = #imageLiteral(resourceName: "others_button")
     static let eagleCircleIconImage: UIImage = #imageLiteral(resourceName: "eagle_circle")
     static let sendIconImage: UIImage = #imageLiteral(resourceName: "send_button")
+    static let questionIconImage: UIImage = UIImage(systemName: "questionmark.circle")!
 }
