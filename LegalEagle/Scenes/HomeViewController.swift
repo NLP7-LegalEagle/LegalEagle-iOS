@@ -109,12 +109,11 @@ class HomeViewController: UIViewController {
     
     private lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.setImage(LegalEagleImageCollection.sendIconImage, for: .normal)
         button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         button.clipsToBounds = true
         button.layer.cornerRadius = 24
         button.isEnabled = false
-        button.backgroundColor = .lightGray
+        button.setImage(LegalEagleImageCollection.sendIconDisabledImage, for: .normal)
         return button
     }()
     
@@ -358,12 +357,12 @@ extension HomeViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text, !text.isEmpty else {
             self.sendButton.isEnabled = false
-            self.sendButton.backgroundColor = .lightGray
+            self.sendButton.setImage(LegalEagleImageCollection.sendIconDisabledImage, for: .normal)
             return
         }
         
         self.sendButton.isEnabled = true
-        self.sendButton.backgroundColor = .clear
+        self.sendButton.setImage(LegalEagleImageCollection.sendIconImage, for: .normal)
         print(text)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

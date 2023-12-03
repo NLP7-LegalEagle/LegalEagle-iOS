@@ -13,7 +13,8 @@
 		EE1A70692B0B43E30086408A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A70682B0B43E30086408A /* HomeViewController.swift */; };
 		EE1A706D2B0B441E0086408A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706C2B0B441E0086408A /* UIView+.swift */; };
 		EE1A706F2B0B44520086408A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A706E2B0B44520086408A /* UIColor+.swift */; };
-		EE3DDDF02B0EFC2A00399970 /* LegalEagle_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3DDDEF2B0EFC2A00399970 /* LegalEagle_LaunchScreen.png */; };
+		EE8D8AB72B1C61C200394931 /* LegalEagle-LaunchScreen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8D8AB62B1C61C200394931 /* LegalEagle-LaunchScreen-Background.png */; };
+		EE8D8ABF2B1C62BC00394931 /* LegalEagle-LaunchScreen-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8D8ABD2B1C62BC00394931 /* LegalEagle-LaunchScreen-Logo.png */; };
 		EEB1A3792B104B49007EFD17 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EEB1A3772B104B49007EFD17 /* Pretendard-Bold.otf */; };
 		EEB1A37A2B104B49007EFD17 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EEB1A3782B104B49007EFD17 /* Pretendard-Regular.otf */; };
 		EEB1A37C2B104B66007EFD17 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB1A37B2B104B66007EFD17 /* UIFont+.swift */; };
@@ -34,7 +35,8 @@
 		EE1A70682B0B43E30086408A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		EE1A706C2B0B441E0086408A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		EE1A706E2B0B44520086408A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		EE3DDDEF2B0EFC2A00399970 /* LegalEagle_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LegalEagle_LaunchScreen.png; sourceTree = "<group>"; };
+		EE8D8AB62B1C61C200394931 /* LegalEagle-LaunchScreen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LegalEagle-LaunchScreen-Background.png"; sourceTree = "<group>"; };
+		EE8D8ABD2B1C62BC00394931 /* LegalEagle-LaunchScreen-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LegalEagle-LaunchScreen-Logo.png"; sourceTree = "<group>"; };
 		EEB1A3772B104B49007EFD17 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		EEB1A3782B104B49007EFD17 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		EEB1A37B2B104B66007EFD17 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -176,7 +178,8 @@
 				EE1A70662B0B43B70086408A /* Scenes */,
 				EEC25CA42B0B42210038DBBB /* Assets.xcassets */,
 				EEC25CA62B0B42210038DBBB /* LaunchScreen.storyboard */,
-				EE3DDDEF2B0EFC2A00399970 /* LegalEagle_LaunchScreen.png */,
+				EE8D8ABD2B1C62BC00394931 /* LegalEagle-LaunchScreen-Logo.png */,
+				EE8D8AB62B1C61C200394931 /* LegalEagle-LaunchScreen-Background.png */,
 				EEC25CA92B0B42210038DBBB /* Info.plist */,
 			);
 			path = LegalEagle;
@@ -242,12 +245,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE8D8ABF2B1C62BC00394931 /* LegalEagle-LaunchScreen-Logo.png in Resources */,
 				EEC25CA82B0B42210038DBBB /* LaunchScreen.storyboard in Resources */,
 				EEB1A3792B104B49007EFD17 /* Pretendard-Bold.otf in Resources */,
 				EEB1A37A2B104B49007EFD17 /* Pretendard-Regular.otf in Resources */,
+				EE8D8AB72B1C61C200394931 /* LegalEagle-LaunchScreen-Background.png in Resources */,
 				EEB1A37E2B104BB2007EFD17 /* Pretendard-SemiBold.otf in Resources */,
 				EEC25CA52B0B42210038DBBB /* Assets.xcassets in Resources */,
-				EE3DDDF02B0EFC2A00399970 /* LegalEagle_LaunchScreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
