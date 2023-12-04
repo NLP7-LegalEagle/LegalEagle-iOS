@@ -12,8 +12,10 @@ import Combine
 class HomeViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     private var inputText = [""]
+    private var outputText = [""]
     
     var activityIndicator: UIActivityIndicatorView?
+    var isLoadingData = false
     
     private var topView: UIView = {
         let view = UIView()
@@ -155,9 +157,12 @@ class HomeViewController: UIViewController {
         chatTableView.dataSource = self
         chatTableView.delegate = self
         chatTableView.register(ChatInputTableViewCell.self,
-                                          forCellReuseIdentifier: ChatInputTableViewCell.identifier)
+                               forCellReuseIdentifier: ChatInputTableViewCell.identifier)
+        chatTableView.register(ChatOutputTableViewCell.self,
+                               forCellReuseIdentifier: ChatOutputTableViewCell.identifier)
         chatTableView.rowHeight = UITableView.automaticDimension
         chatTableView.estimatedRowHeight = 100
+        
         
         // 키보드 알림 추가
         NotificationCenter.default.addObserver(
@@ -313,14 +318,18 @@ class HomeViewController: UIViewController {
         NetworkModel.shared.sendText(text: text)
             .receive(on: DispatchQueue.main)
             .sink { error in
-                
+//                print(error)
             } receiveValue: { output in
-                self.inputTextField.text = output.output
+//                self.inputTextField.text = output.output
+                print(output.output)
+                self.outputText.append(output.output)
+                self.showCustomIndicator(for: 2) {
+                    self.chatTableView.reloadData()
+                }
             }
             .store(in: &cancellable)
         
         self.inputText.append(text)
-        print(inputText)
         self.chatTableView.reloadData()
         
         //MARK: 텍스트 서버에 전송하는 함수 호출
@@ -368,6 +377,8 @@ class HomeViewController: UIViewController {
         indicator.center = self.view.center
         self.view.addSubview(indicator)
         indicator.startAnimating()
+        
+        isLoadingData = true
 
         activityIndicator = indicator // 나중에 중지 가능
 
@@ -375,6 +386,9 @@ class HomeViewController: UIViewController {
             indicator.stopAnimating()
             indicator.removeFromSuperview()
             completion()
+
+            self.isLoadingData = false
+//            self.chatTableView.reloadData()
         }
     }
 }
@@ -400,26 +414,45 @@ extension HomeViewController: UITextFieldDelegate {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.inputText.count)
-        return self.inputText.count-1
+        let tableviewNumberOfRowsInSection = (self.inputText.count-1) + (self.outputText.count-1)
+        
+        return tableviewNumberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.identifier) as? ChatInputTableViewCell else {
-            return UITableViewCell()
+        
+        
+        if (indexPath.row%2 == 1) {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.identifier) as? ChatOutputTableViewCell else {
+                return UITableViewCell()
+            }
+            if self.outputText.count > 1 {
+                let chatOutputText = self.outputText[(indexPath.row+1)/2]
+                print(chatOutputText)
+                cell.updateChatOutput(chatOutputText)
+            }
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.identifier) as? ChatInputTableViewCell else {
+                return UITableViewCell()
+            }
+            if self.inputText.count > 1 {
+                let chatInputText = self.inputText[(indexPath.row+2)/2]
+                print(chatInputText)
+                cell.updateChatInput(chatInputText)
+            }
+            
+            return cell
         }
         
-        if self.inputText.count > 1 {
-            let chatInputText = self.inputText[indexPath.row+1]
-            print(chatInputText)
-            cell.updateChatInput(chatInputText)
-        }
         
-        showCustomIndicator(for: 5) {
-            print("End Indicator")
-        }
-        
-        return cell
+//        
+//        showCustomIndicator(for: 5) {
+//            print("End Indicator")
+//        }
+//        
+//        return cell
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

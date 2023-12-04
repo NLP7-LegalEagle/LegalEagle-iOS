@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class NetworkModel {
-    private var domain: URL = URL(string: "http://127.0.0.1:5000")!
+    private var domain: URL = URL(string: "http://127.0.0.1:1525")!
     static let shared: NetworkModel = NetworkModel()
     private init() { }
 }

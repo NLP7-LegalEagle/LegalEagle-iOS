@@ -20,7 +20,9 @@ class ChatInputTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .legalGray
         view.layer.masksToBounds = true
-        view.roundCorners(cornerRadius: 15, maskedCorners: [ .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner])
+        view.roundCorners(cornerRadius: 15, maskedCorners: [ .layerMinXMinYCorner,
+                                                             .layerMaxXMaxYCorner,
+                                                             .layerMinXMaxYCorner])
         
         return view
     }()
